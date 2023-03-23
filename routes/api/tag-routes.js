@@ -57,8 +57,21 @@ router.get('/:id', async (req, res) => {
 	}
 });
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
 	// create a new tag
+	try {
+		const newTag = await Tag.create(req.body);
+		if (newTag) {
+			res.status(200).json(newTag);
+		} else {
+			res.status(404).json({
+				message: 'Unable to create Tag',
+			});
+		}
+	} catch (err) {
+		console.error(err);
+		res.status(500).json({ err: 'Internal server error' });
+	}
 });
 
 router.put('/:id', (req, res) => {
