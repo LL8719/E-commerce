@@ -74,12 +74,46 @@ router.post('/', async (req, res) => {
 	}
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', async (req, res) => {
 	// update a tag's name by its `id` value
+	try {
+		const updatedTag = await Tag.update(req.body, {
+			where: {
+				id: req.params.id,
+			},
+		});
+		if (updatedTag) {
+			res.status(200).json(updatedTag);
+		} else {
+			res.status(404).json({
+				message: 'Unable to update Tag',
+			});
+		}
+	} catch (err) {
+		console.error(err);
+		res.status(500).json({ err: 'Internal server error' });
+	}
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
 	// delete on tag by its `id` value
+	try {
+		const deletedTag = await Tag.destroy({
+			where: {
+				id: req.params.id,
+			},
+		});
+		if (deletedTag) {
+			res.status(200).json(deletedTag);
+		} else {
+			res.status(404).json({
+				message: 'Unable to delete Tag',
+			});
+		}
+	} catch (err) {
+		console.error(err);
+		res.status(500).json({ err: 'Internal server error' });
+	}
 });
 
 module.exports = router;
