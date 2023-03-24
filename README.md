@@ -29,6 +29,8 @@ Click the following link for video.
 
 Express.js along with Sequielize, MySQL, dot.env packages, along with a cross-platform desktop application are required to be able to run the application. Please search the web for instructions on installing the packages or platforms mentioned.
 
+Clone the repo on your local machine and then follow the steps outlined under "Usage".
+
 ## <a href="Usage">Usage</a>
 
 Use the schema.sql file in the db folder to create your database using MySQL shell commands.
